@@ -41,6 +41,7 @@ class TechEquipment(models.Model):
     
     tax_value = fields.Monetary(
         string='Valor con Impuesto (15%)',
+        compute='_compute_tax_value',
         store=True,
         currency_field='currency_id'
     )
@@ -62,3 +63,14 @@ class TechEquipment(models.Model):
         for record in self:
             if record.serial and len(record.serial) < 8:
                 raise ValidationError(_('El número de serie debe tener al menos 8 caracteres.'))
+
+
+
+    @api.depends('cost')
+    def _compute_tax_value(self):
+        for record in self:
+            if record.cost:
+                record.tax_value = record.cost * 1.15
+            else:
+                record.tax_value = 0.0
+

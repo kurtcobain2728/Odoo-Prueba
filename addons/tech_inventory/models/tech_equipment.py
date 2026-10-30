@@ -74,3 +74,43 @@ class TechEquipment(models.Model):
             else:
                 record.tax_value = 0.0
 
+
+
+
+    @api.onchange('employee_id')
+    def _onchange_employee_id(self):
+        """Si se asigna un empleado, cambia automáticamente a Asignado."""
+        if self.employee_id:
+            self.state = 'assigned'
+        elif self.state == 'assigned':
+            self.state = 'available'
+
+    @api.onchange('state')
+    def _onchange_state(self):
+        """Si pasa a reparación o desincorporado, limpia el empleado asignado."""
+        if self.state in ('repair', 'decommissioned'):
+            self.employee_id = False
+
+    def action_set_available(self):
+        """Método para botón: Pasa a Disponible y limpia el empleado."""
+        for record in self:
+            record.write({
+                'state': 'available',
+                'employee_id': False,
+            })
+
+    def action_set_repair(self):
+        """Método para botón: Pasa a En Reparación y limpia el empleado."""
+        for record in self:
+            record.write({
+                'state': 'repair',
+                'employee_id': False,
+            })
+
+    def action_set_decommissioned(self):
+        """Método para botón: Pasa a Desincorporado y limpia el empleado."""
+        for record in self:
+            record.write({
+                'state': 'decommissioned',
+                'employee_id': False,
+            })

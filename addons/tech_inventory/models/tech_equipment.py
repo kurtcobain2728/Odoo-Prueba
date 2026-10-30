@@ -11,7 +11,6 @@ class TechEquipment(models.Model):
     serial = fields.Char(
         string='Número de Serie', 
         required=True, 
-        unique=True,
         index=True
     )
     
@@ -58,5 +57,8 @@ class TechEquipment(models.Model):
         ('serial_unique', 'unique(serial)', 'El número de serie debe ser único!')
     ]
 
-
-
+    @api.constrains('serial')
+    def _check_serial(self):
+        for record in self:
+            if record.serial and len(record.serial) < 8:
+                raise ValidationError(_('El número de serie debe tener al menos 8 caracteres.'))

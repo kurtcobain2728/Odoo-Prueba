@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="category_laptop" model="tech.category">
             <field name="name">Laptops</field>
             <field name="description">Computadoras portátiles para trabajo móvil</field>
@@ -20,6 +20,17 @@
             <field name="name">Periféricos</field>
             <field name="description">Monitores, teclados, mouse y accesorios</field>
         </record>
+
+
+
+
+
+        <record id="category_network" model="tech.category">
+            <field name="name">Redes y Telecomunicaciones</field>
+            <field name="description">Routers, switches, access points y cableado estructurado</field>
+        </record>
+
+
 
         <record id="equipment_laptop_lenovo" model="tech.equipment">
             <field name="name">Lenovo ThinkPad X1</field>
@@ -46,6 +57,43 @@
             <field name="state">available</field>
             <field name="cost">3500.00</field>
             <field name="purchase_date">2023-11-20</field>
+        </record>
+
+
+
+
+
+        <record id="equipment_dell_optiplex" model="tech.equipment">
+            <field name="name">Dell OptiPlex 7090</field>
+            <field name="serial">OPT-2024-11223344</field>
+            <field name="category_id" ref="category_desktop"/>
+            <field name="state">available</field>
+            <field name="cost">850.00</field>
+            <field name="purchase_date">2024-03-01</field>
+        </record>
+
+
+
+
+        <record id="equipment_monitor_lg" model="tech.equipment">
+            <field name="name">Monitor LG UltraWide 29"</field>
+            <field name="serial">MON-2024-55667788</field>
+            <field name="category_id" ref="category_peripheral"/>
+            <field name="state">available</field>
+            <field name="cost">280.00</field>
+            <field name="purchase_date">2024-03-15</field>
+        </record>
+
+
+
+        
+        <record id="equipment_cisco_switch" model="tech.equipment">
+            <field name="name">Cisco Catalyst 9200</field>
+            <field name="serial">CSCO-2024-99001122</field>
+            <field name="category_id" ref="category_network"/>
+            <field name="state">available</field>
+            <field name="cost">2100.00</field>
+            <field name="purchase_date">2024-04-05</field>
         </record>
     </data>
 </odoo>

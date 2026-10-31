@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_employee_form_inherit_tech" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.tech</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//notebook" position="inside">
+                <page string="Equipos Asignados" name="assigned_equipments">
+                    <field name="equipment_ids" readonly="1">
+                        <list string="Equipos a Cargo">
+                            <field name="name" string="Equipo"/>
+                            <field name="serial" string="N° de Serie"/>
+                            <field name="category_id" string="Categoría"/>
+                            <field name="state" widget="badge" 
+                                   decoration-success="state == 'available'"
+                                   decoration-info="state == 'assigned'"
+                                   decoration-warning="state == 'repair'"
+                                   decoration-danger="state == 'decommissioned'"/>
+                            <field name="cost" string="Costo (USD)"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

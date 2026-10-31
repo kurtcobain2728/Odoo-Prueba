@@ -8,7 +8,6 @@ services:
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo123
       - POSTGRES_DB=postgres
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -26,6 +25,8 @@ services:
     volumes:
       - ./addons:/mnt/extra-addons
       - ./odoo.conf:/etc/odoo/odoo.conf
+      - odoo_data:/var/lib/odoo
 
 volumes:
   postgres_data:
+  odoo_data:

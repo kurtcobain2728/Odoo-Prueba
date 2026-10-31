@@ -6,3 +6,7 @@ __pycache__/
 *.pyo
 
 *.log
+
+*.docx
+GUIA_ESTUDIO*
+Guia_Estudio*

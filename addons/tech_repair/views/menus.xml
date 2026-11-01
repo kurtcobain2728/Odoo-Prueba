@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_tech_repair_root" 
+              name="Reparaciones IT" 
+              sequence="15"/>
+
+    <menuitem id="menu_tech_repair_orders" 
+              name="Órdenes de Reparación" 
+              parent="menu_tech_repair_root"
+              action="action_tech_repair"
+              sequence="10"/>
+</odoo>

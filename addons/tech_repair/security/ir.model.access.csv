@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tech_repair_admin,tech.repair.admin,model_tech_repair,base.group_system,1,1,1,1
+access_tech_repair_manager,tech.repair.manager,model_tech_repair,tech_inventory.group_tech_manager,1,1,1,1
+access_tech_repair_user,tech.repair.user,model_tech_repair,tech_inventory.group_tech_user,1,1,1,0
+access_tech_repair_base,tech.repair.base,model_tech_repair,base.group_user,1,1,1,0

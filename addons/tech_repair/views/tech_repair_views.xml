@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tech_repair_list" model="ir.ui.view">
+        <field name="name">tech.repair.list</field>
+        <field name="model">tech.repair</field>
+        <field name="arch" type="xml">
+            <list string="Órdenes de Reparación"
+                  decoration-muted="state == 'cancelled'"
+                  decoration-warning="state == 'in_progress'"
+                  decoration-success="state == 'done'"
+                  decoration-info="state == 'draft'">
+                <field name="name"/>
+                <field name="equipment_id"/>
+                <field name="category_id"/>
+                <field name="technician_id"/>
+                <field name="date_request"/>
+                <field name="cost" widget="monetary"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tech_repair_form" model="ir.ui.view">
+        <field name="name">tech.repair.form</field>
+        <field name="model">tech.repair</field>
+        <field name="arch" type="xml">
+            <form string="Orden de Reparación">
+                <header>
+                    <button name="action_start_repair" 
+                            string="Iniciar Reparación" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_set_done" 
+                            string="Marcar como Reparado" 
+                            type="object" 
+                            class="btn-success"
+                            invisible="state != 'in_progress'"/>
+
+                    <button name="action_cancel" 
+                            string="Cancelar" 
+                            type="object" 
+                            class="btn-secondary"
+                            invisible="state in ('done', 'cancelled')"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Código de la reparación..."/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Información del Equipo">
+                            <field name="equipment_id"/>
+                            <field name="category_id"/>
+                            <field name="serial"/>
+                            <field name="technician_id"/>
+                        </group>
+                        <group string="Plazos y Costo">
+                            <field name="date_request"/>
+                            <field name="date_close"/>
+                            <field name="cost"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Diagnóstico y Falla">
+                            <field name="description" placeholder="Describa la falla detalladamente..."/>
+                        </page>
+                        <page string="Solución Aplicada">
+                            <field name="solution" placeholder="Describa qué piezas se cambiaron o qué procedimiento se ejecutó..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tech_repair" model="ir.actions.act_window">
+        <field name="name">Órdenes de Reparación</field>
+        <field name="res_model">tech.repair</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Registra tu primera orden de reparación de equipos!
+            </p>
+        </field>
+    </record>
+</odoo>
